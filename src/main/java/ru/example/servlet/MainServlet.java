@@ -1,8 +1,8 @@
-package ru.netology.servlet;
+package ru.example.servlet;
 
-import ru.netology.controller.PostController;
-import ru.netology.repository.PostRepository;
-import ru.netology.service.PostService;
+import ru.example.controller.PostController;
+import ru.example.repository.PostRepository;
+import ru.example.service.PostService;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +31,7 @@ public class MainServlet extends HttpServlet {
       }
       if (method.equals("GET") && path.matches("/api/posts/\\d+")) {
         // easy way
-        final var id = Long.parseLong(path.substring(path.lastIndexOf("/")));
+        final var id = parseId(path);
         controller.getById(id, resp);
         return;
       }
@@ -41,7 +41,7 @@ public class MainServlet extends HttpServlet {
       }
       if (method.equals("DELETE") && path.matches("/api/posts/\\d+")) {
         // easy way
-        final var id = Long.parseLong(path.substring(path.lastIndexOf("/")));
+        final var id = parseId(path);
         controller.removeById(id, resp);
         return;
       }
@@ -51,5 +51,10 @@ public class MainServlet extends HttpServlet {
       resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
   }
+
+  private long parseId(String path){
+    return Long.parseLong(path.substring(path.lastIndexOf("/") + 1));
+  }
+
 }
 

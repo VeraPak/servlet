@@ -1,4 +1,4 @@
-package ru.netology.exception;
+package ru.example.exception;
 
 public class NotFoundException extends RuntimeException {
   public NotFoundException() {

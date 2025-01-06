@@ -1,8 +1,8 @@
-package ru.netology.controller;
+package ru.example.controller;
 
 import com.google.gson.Gson;
-import ru.netology.model.Post;
-import ru.netology.service.PostService;
+import ru.example.model.Post;
+import ru.example.service.PostService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -23,19 +23,24 @@ public class PostController {
     response.getWriter().print(gson.toJson(data));
   }
 
-  public void getById(long id, HttpServletResponse response) {
-    // TODO: deserialize request & serialize response
+  public void getById(long id, HttpServletResponse response) throws IOException {
+    response.setContentType(APPLICATION_JSON);
+    final var gson = new Gson();
+    final var post = service.getById(id);
+    response.getWriter().print(gson.toJson(post));
   }
 
   public void save(Reader body, HttpServletResponse response) throws IOException {
     response.setContentType(APPLICATION_JSON);
     final var gson = new Gson();
     final var post = gson.fromJson(body, Post.class);
+    System.out.println(post);
     final var data = service.save(post);
     response.getWriter().print(gson.toJson(data));
   }
 
-  public void removeById(long id, HttpServletResponse response) {
-    // TODO: deserialize request & serialize response
+  public void removeById(long id, HttpServletResponse response) throws IOException {
+    service.removeById(id);
+    response.getWriter().printf("Статья N %d удалена ", id);
   }
 }
