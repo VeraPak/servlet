@@ -1,11 +1,13 @@
 package ru.example.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.example.exception.NotFoundException;
 import ru.example.model.Post;
 import ru.example.repository.PostRepository;
 
 import java.util.List;
-
+@Service
 public class PostService {
   private final PostRepository repository;
 

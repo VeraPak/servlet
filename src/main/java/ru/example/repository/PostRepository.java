@@ -1,5 +1,6 @@
 package ru.example.repository;
 
+import org.springframework.stereotype.Repository;
 import ru.example.exception.NotFoundException;
 import ru.example.model.Post;
 
@@ -8,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 // Stub
+@Repository
 public class PostRepository {
   private final ConcurrentHashMap<Long, Post> posts = new ConcurrentHashMap<>();
   private final AtomicLong currentId = new AtomicLong(1);
